@@ -1,0 +1,5 @@
+{
+  "name": "mumsy.ai",
+  "description": "A comprehensive mom and child tracker that monitors health records, predicts risks like preeclampsia and anemia, and alerts health professionals. Designed for accessibility with community health worker support.",
+  "requestFramePermissions": []
+}
