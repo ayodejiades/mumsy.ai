@@ -1,40 +1,15 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import React from "react";
-import { ClientLayout } from "@/components/ClientLayout";
 
-const inter = Inter({ subsets: ["latin"] });
-
-const APP_NAME = "Mumsy.ai";
-const APP_DEFAULT_TITLE = "Mumsy.ai - CHW Action Tool";
-const APP_TITLE_TEMPLATE = "%s - Mumsy.ai";
-const APP_DESCRIPTION = "Community Health Worker action tool to detect preeclampsia and anemia risks.";
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
-  applicationName: APP_NAME,
-  title: {
-    default: APP_DEFAULT_TITLE,
-    template: APP_TITLE_TEMPLATE,
-  },
-  description: APP_DESCRIPTION,
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: APP_DEFAULT_TITLE,
-  },
-  formatDetection: {
-    telephone: false,
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  title: "mumsy.ai",
+  description: "A comprehensive mom and child tracker that monitors health records, predicts risks like preeclampsia and anemia, and alerts health professionals. Designed for accessibility with community health worker support.",
 };
 
 export default function RootLayout({
@@ -43,11 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr" className="light">
-      <body className={`${inter.className}`}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+    <html lang="en" className={inter.variable}>
+      <body className="antialiased font-sans">
+        {children}
       </body>
     </html>
   );

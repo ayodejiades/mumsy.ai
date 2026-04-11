@@ -1,4 +1,4 @@
-// File: /Users/mac/Documents/mumsy.ai/src/app/layout.tsx
+// File: /Users/mac/Desktop/projects/hackathons/mumsy.ai/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
