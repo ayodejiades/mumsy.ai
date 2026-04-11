@@ -19,13 +19,13 @@ export default function App() {
   const [view, setView] = useState<'landing' | 'dashboard'>('landing');
   const [activeTab, setActiveTab] = useState<'mother' | 'child'>('mother');
   const [profile, setProfile] = useState<UserProfile>({
-    name: "Sarah Johnson",
+    name: "Aliko Aisha",
     age: 28,
     weeksPregnant: 24,
     hasChild: true,
     childName: "Leo",
     childAgeMonths: 8,
-    isCHWMode: false
+    isCHWMode: true
   });
   const [records, setRecords] = useState<HealthRecord[]>([]);
   const [childRecords, setChildRecords] = useState<ChildRecord[]>([]);
@@ -123,26 +123,11 @@ export default function App() {
             </div>
             
             <div className="flex items-center gap-3">
-              <div className="bg-white border rounded-full p-1 flex shadow-sm">
-                <button 
-                  onClick={() => setActiveTab('mother')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'mother' ? 'bg-pink-600 text-white shadow-md' : 'text-gray-500 hover:text-pink-600'}`}
-                >
-                  <Heart size={16} fill={activeTab === 'mother' ? "currentColor" : "none"} />
-                  Mother
-                </button>
-                <button 
-                  onClick={() => setActiveTab('child')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === 'child' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-500 hover:text-blue-600'}`}
-                >
-                  <Baby size={16} fill={activeTab === 'child' ? "currentColor" : "none"} />
-                  Child
-                </button>
-              </div>
+
 
               <Button 
                 variant={profile.isCHWMode ? "default" : "outline"}
-                onClick={toggleCHWMode}
+                // onClick={toggleCHWMode}
                 className={`rounded-full ${profile.isCHWMode ? (activeTab === 'mother' ? 'bg-pink-600' : 'bg-blue-600') : (activeTab === 'mother' ? 'border-pink-200 text-pink-600' : 'border-blue-200 text-blue-600')}`}
               >
                 <Users size={18} className="mr-2" />
@@ -176,11 +161,12 @@ export default function App() {
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-8"
                 >
-                  {activeTab === 'mother' ? (
+                  <HealthSummary records={records} latestPrediction={latestPrediction} />
+                  {/* {activeTab === 'mother' ? (
                     <HealthSummary records={records} latestPrediction={latestPrediction} />
                   ) : (
                     <ChildHealthSummary records={childRecords} latestPrediction={latestChildPrediction} childName={profile.childName} />
-                  )}
+                  )} */}
                 </motion.div>
               </TabsContent>
 
@@ -192,11 +178,12 @@ export default function App() {
                   exit={{ opacity: 0, y: -20 }}
                   className="max-w-2xl mx-auto"
                 >
-                  {activeTab === 'mother' ? (
+                  <VitalsForm onSave={onSaveRecord} isCHWMode={profile.isCHWMode} />
+                  {/* {activeTab === 'mother' ? (
                     <VitalsForm onSave={onSaveRecord} isCHWMode={profile.isCHWMode} />
                   ) : (
                     <ChildForm onSave={onSaveChildRecord} isCHWMode={profile.isCHWMode} childName={profile.childName} />
-                  )}
+                  )} */}
                 </motion.div>
               </TabsContent>
 

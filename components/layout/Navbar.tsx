@@ -29,10 +29,6 @@ export function Navbar({ onNavigate }: NavbarProps) {
         <Button variant="ghost" size="icon" className="md:hidden">
           <Menu size={24} />
         </Button>
-        <Button variant="outline" className="rounded-full border-pink-200 text-pink-600 hover:bg-pink-50">
-          <User size={18} className="mr-2" />
-          Profile
-        </Button>
       </div>
     </nav>
   );
