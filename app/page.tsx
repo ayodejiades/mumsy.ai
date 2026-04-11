@@ -153,7 +153,7 @@ export default function App() {
             </TabsList>
 
             <AnimatePresence mode="wait">
-              <TabsContent value="overview">
+              <TabsContent key="overview" value="overview">
                 <motion.div 
                   key={`${activeTab}-overview`}
                   initial={{ opacity: 0, y: 20 }}
@@ -170,7 +170,7 @@ export default function App() {
                 </motion.div>
               </TabsContent>
 
-              <TabsContent value="records">
+              <TabsContent key="records" value="records">
                 <motion.div 
                   key={`${activeTab}-records`}
                   initial={{ opacity: 0, y: 20 }}
@@ -187,7 +187,7 @@ export default function App() {
                 </motion.div>
               </TabsContent>
 
-              <TabsContent value="history">
+              <TabsContent key="history" value="history">
                 <motion.div 
                   key={`${activeTab}-history`}
                   initial={{ opacity: 0, y: 20 }}
