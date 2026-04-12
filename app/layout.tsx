@@ -12,15 +12,28 @@ export const metadata: Metadata = {
   description: "A comprehensive mom and child tracker that monitors health records, predicts risks like preeclampsia and anemia, and alerts health professionals. Designed for accessibility with community health worker support.",
 };
 
+import { BrandNavbar } from "@/components/layout/BrandNavbar";
+import { BrandFooter } from "@/components/layout/BrandFooter";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+      </head>
       <body className="antialiased font-sans">
-        {children}
+        <BrandNavbar />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <BrandFooter />
       </body>
     </html>
   );

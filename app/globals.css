@@ -5,32 +5,49 @@
 @theme {
   --font-sans: var(--font-sans), "Geist Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-headline: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.145 0 0);
+  --color-background: #f8f9ff;
+  --color-foreground: #121c2a;
 
   --color-primary: #DB2777;
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-container: #DB2777;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed: #FDF2F8;
+  --color-on-primary-fixed: #9D174D;
 
-  --color-secondary: #FDF2F8;
-  --color-secondary-foreground: #9D174D;
+  --color-secondary: #585f6c;
+  --color-secondary-container: #dce2f3;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #5e6572;
 
-  --color-accent: #FCE7F3;
-  --color-accent-foreground: #9D174D;
+  --color-tertiary: #a12e70;
+  --color-tertiary-container: #c0488a;
+  --color-on-tertiary: #ffffff;
 
-  --color-muted: #F9FAFB;
-  --color-muted-foreground: #6B7280;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
 
-  --color-card: #FFFFFF;
-  --color-card-foreground: #1F2937;
+  --color-surface: #f8f9ff;
+  --color-on-surface: #121c2a;
+  --color-on-surface-variant: #574048;
+  --color-surface-variant: #d9e3f6;
+  --color-surface-dim: #d0dbed;
+  --color-surface-bright: #f8f9ff;
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e6eeff;
+  --color-surface-container-high: #dee9fc;
+  --color-surface-container-highest: #d9e3f6;
+  --color-surface-container-lowest: #ffffff;
 
-  --color-border: #F3F4F6;
-  --color-input: #F3F4F6;
-  --color-ring: #DB2777;
+  --color-outline: #8b7079;
+  --color-outline-variant: #debec8;
 
   --radius-lg: 1rem;
   --radius-md: 0.75rem;
   --radius-sm: 0.5rem;
+  --radius-xl: 0.75rem;
 }
 
 @layer base {

@@ -28,7 +28,6 @@ export function ChildForm({ onSave, isCHWMode, childName }: ChildFormProps) {
       temperature: temperature ? Number(temperature) : undefined,
       notes,
     });
-    // Reset form
     setWeight("");
     setHeight("");
     setHeadCircumference("");
@@ -37,102 +36,70 @@ export function ChildForm({ onSave, isCHWMode, childName }: ChildFormProps) {
   };
 
   return (
-    <Card className="shadow-xl border-blue-100 overflow-hidden">
-      <CardHeader className="bg-blue-50/50">
-        <CardTitle className="text-xl text-blue-700 flex items-center gap-2">
-          <Baby className="text-blue-500" />
-          {isCHWMode ? `Record Data for ${childName || 'Child'}` : `Enter ${childName || 'Child'}'s Vitals`}
-        </CardTitle>
-        <CardDescription>
-          {isCHWMode 
-            ? "Enter the child's growth measurements." 
-            : "Track your child's growth and health."}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="weight" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Scale size={16} className="text-blue-500" />
-                Weight (kg)
-              </Label>
-              <Input 
-                id="weight"
-                placeholder="e.g. 8.5" 
-                type="number" 
-                step="0.1"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                className="text-lg h-12 border-blue-100 focus:ring-blue-500"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="height" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Ruler size={16} className="text-green-500" />
-                Height (cm)
-              </Label>
-              <Input 
-                id="height"
-                placeholder="e.g. 72" 
-                type="number" 
-                step="0.1"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-                className="text-lg h-12 border-blue-100 focus:ring-blue-500"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="temp" className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                <Thermometer size={16} className="text-orange-500" />
-                Temperature (°C)
-              </Label>
-              <Input 
-                id="temp"
-                placeholder="e.g. 36.6" 
-                type="number" 
-                step="0.1"
-                value={temperature}
-                onChange={(e) => setTemperature(e.target.value)}
-                className="text-lg h-12 border-blue-100 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="head" className="text-sm font-semibold text-gray-700">Head Circumference (cm)</Label>
-              <Input 
-                id="head"
-                placeholder="e.g. 44" 
-                type="number" 
-                step="0.1"
-                value={headCircumference}
-                onChange={(e) => setHeadCircumference(e.target.value)}
-                className="text-lg h-12 border-blue-100 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="notes" className="text-sm font-semibold text-gray-700">Notes</Label>
+    <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 gap-6">
+          <div className="space-y-3">
+            <Label htmlFor="weight" className="text-sm font-bold text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+              <Scale size={16} className="text-blue-600" />
+              Weight (kg)
+            </Label>
             <Input 
-              id="notes"
-              placeholder="Any observations..." 
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="text-lg h-12 border-blue-100 focus:ring-blue-500"
+              id="weight"
+              placeholder="e.g. 8.5" 
+              type="number" 
+              step="0.1"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              className="text-lg h-14 rounded-2xl border-outline-variant bg-white focus:border-blue-500 focus:ring-blue-500/20 font-medium"
+              required
             />
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 text-lg rounded-xl shadow-lg shadow-blue-200 transition-all active:scale-95">
-            <Save className="mr-2" />
-            Save Child Records
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+          <div className="space-y-3">
+            <Label htmlFor="height" className="text-sm font-bold text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+              <Ruler size={16} className="text-green-600" />
+              Height (cm)
+            </Label>
+            <Input 
+              id="height"
+              placeholder="e.g. 72" 
+              type="number" 
+              step="0.1"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+              className="text-lg h-14 rounded-2xl border-outline-variant bg-white focus:border-blue-500 focus:ring-blue-500/20 font-medium"
+              required
+            />
+          </div>
+
+          <div className="space-y-3">
+            <Label htmlFor="temp" className="text-sm font-bold text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+              <Thermometer size={16} className="text-orange-500" />
+              Temperature (°C)
+            </Label>
+            <Input 
+              id="temp"
+              placeholder="e.g. 36.6" 
+              type="number" 
+              step="0.1"
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
+              className="text-lg h-14 rounded-2xl border-outline-variant bg-white focus:border-blue-500 focus:ring-blue-500/20 font-medium"
+            />
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          className="w-full bg-gradient-to-br from-blue-600 to-blue-700 text-white h-16 text-lg rounded-2xl font-headline font-bold shadow-xl shadow-blue-500/20 transition-all active:scale-[0.98] hover:opacity-90"
+        >
+          <div className="flex items-center justify-center gap-2">
+            <span className="material-symbols-outlined">save</span>
+            Save Growth Record
+          </div>
+        </button>
+      </form>
+    </div>
   );
 }

@@ -1,8 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line } from 'recharts';
 import { ChildRecord, PredictionResult } from "@/types";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, CheckCircle2, TrendingUp, Thermometer, Bell, Baby } from "lucide-react";
+import { AlertCircle, CheckCircle2, TrendingUp, Thermometer, Bell, Baby, Activity } from "lucide-react";
 
 interface ChildHealthSummaryProps {
   records: ChildRecord[];
@@ -18,94 +16,99 @@ export function ChildHealthSummary({ records, latestPrediction, childName }: Chi
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {latestPrediction && (
-        <Alert variant={latestPrediction.riskLevel === 'high' ? 'destructive' : 'default'} 
-          className={`border-2 ${latestPrediction.riskLevel === 'high' ? 'bg-orange-50 border-orange-200' : 'bg-blue-50 border-blue-200'}`}>
-          {latestPrediction.riskLevel === 'high' ? <AlertCircle className="h-5 w-5 text-orange-600" /> : <CheckCircle2 className="h-5 w-5 text-blue-600" />}
-          <AlertTitle className={`text-lg font-bold ${latestPrediction.riskLevel === 'high' ? 'text-orange-800' : 'text-blue-800'}`}>
-            AI Child Health Insight: {latestPrediction.condition === 'none' ? 'Healthy Growth' : latestPrediction.condition.toUpperCase()} Risk
-          </AlertTitle>
-          <AlertDescription className="mt-2 space-y-2">
-            <p className="text-gray-700 font-medium">{latestPrediction.message}</p>
+        <div 
+          className={`p-6 rounded-[2rem] border-2 flex gap-4 items-start ${
+            latestPrediction.riskLevel === 'high' 
+              ? 'bg-orange-50 border-orange-200 text-orange-900 shadow-lg shadow-orange-500/10' 
+              : 'bg-blue-50 border-blue-100 text-blue-900'
+          }`}
+        >
+          <div className={`p-3 rounded-2xl ${latestPrediction.riskLevel === 'high' ? 'bg-orange-100' : 'bg-white/50'}`}>
+            {latestPrediction.riskLevel === 'high' ? <AlertCircle className="h-6 w-6 text-orange-600" /> : <Activity className="h-6 w-6 text-blue-600" />}
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-headline font-extrabold mb-1">
+              AI Child Insight: {latestPrediction.condition === 'none' ? 'Healthy Growth' : latestPrediction.condition.toUpperCase()}
+            </h3>
+            <p className="font-medium opacity-90 leading-relaxed mb-4">{latestPrediction.message}</p>
             {latestPrediction.riskLevel === 'high' && (
-              <div className="flex items-center gap-2 text-orange-600 font-bold bg-orange-100 p-2 rounded-md animate-pulse">
+              <div className="flex items-center gap-2 font-bold bg-orange-100/50 p-3 rounded-xl animate-pulse mb-4 text-orange-700">
                 <Bell className="h-4 w-4" />
-                <span>Alert: Pediatrician notification recommended.</span>
+                <span>Pediatrician notification recommended.</span>
               </div>
             )}
-            <div className={`p-3 rounded-lg ${latestPrediction.riskLevel === 'high' ? 'bg-orange-100/50' : 'bg-blue-100/50'}`}>
-              <span className="font-bold">Recommendation: </span>
+            <div className={`p-4 rounded-xl font-bold ${latestPrediction.riskLevel === 'high' ? 'bg-orange-100' : 'bg-white/40'}`}>
+              <span className="opacity-70 text-sm block mb-1">Recommended Action</span>
               {latestPrediction.recommendation}
             </div>
-          </AlertDescription>
-        </Alert>
+          </div>
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="shadow-lg border-blue-50">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500 flex items-center gap-2">
-              <TrendingUp size={16} className="text-blue-500" />
-              Weight Growth (kg)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[200px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={chartData}>
-                  <defs>
-                    <linearGradient id="colorWeight" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1}/>
-                      <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                  <XAxis dataKey="date" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis fontSize={12} tickLine={false} axisLine={false} domain={['dataMin - 1', 'dataMax + 1']} />
-                  <Tooltip 
-                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
-                  />
-                  <Area type="monotone" dataKey="weight" stroke="#2563EB" fillOpacity={1} fill="url(#colorWeight)" strokeWidth={3} />
-                </AreaChart>
-              </ResponsiveContainer>
+        <div className="bg-white/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <TrendingUp size={18} className="text-blue-500" />
+              <h4 className="font-headline font-bold text-on-surface">Weight Growth (kg)</h4>
             </div>
-          </CardContent>
-        </Card>
+            <span className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Normal Range</span>
+          </div>
+          <div className="h-[220px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorWeight" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                <XAxis dataKey="date" fontSize={10} tickLine={false} axisLine={false} tick={{fill: '#6b7280'}} />
+                <YAxis fontSize={10} tickLine={false} axisLine={false} tick={{fill: '#6b7280'}} domain={['dataMin - 1', 'dataMax + 1']} />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', fontFamily: 'Plus Jakarta Sans' }}
+                />
+                <Area type="monotone" dataKey="weight" stroke="#3B82F6" fillOpacity={1} fill="url(#colorWeight)" strokeWidth={4} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
 
-        <Card className="shadow-lg border-blue-50">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500 flex items-center gap-2">
-              <Thermometer size={16} className="text-orange-500" />
-              Temperature Trend (°C)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-[200px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                  <XAxis dataKey="date" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis fontSize={12} tickLine={false} axisLine={false} domain={[35, 40]} />
-                  <Tooltip 
-                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
-                  />
-                  <Line type="monotone" dataKey="temp" stroke="#F97316" strokeWidth={3} dot={{ r: 4, fill: '#F97316' }} activeDot={{ r: 6 }} />
-                </LineChart>
-              </ResponsiveContainer>
+        <div className="bg-white/40 backdrop-blur-sm p-6 rounded-3xl border border-white/20">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2">
+              <Thermometer size={18} className="text-orange-500" />
+              <h4 className="font-headline font-bold text-on-surface">Temperature Trend</h4>
             </div>
-          </CardContent>
-        </Card>
+            <span className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Post-Vaccine</span>
+          </div>
+          <div className="h-[220px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                <XAxis dataKey="date" fontSize={10} tickLine={false} axisLine={false} tick={{fill: '#6b7280'}} />
+                <YAxis fontSize={10} tickLine={false} axisLine={false} tick={{fill: '#6b7280'}} domain={[35, 40]} />
+                <Tooltip 
+                  contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', fontFamily: 'Plus Jakarta Sans' }}
+                />
+                <Line type="monotone" dataKey="temp" stroke="#F97316" strokeWidth={4} dot={{ r: 5, fill: '#F97316', stroke: '#fff', strokeWidth: 2 }} activeDot={{ r: 7 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
       {records.length === 0 && (
-        <div className="bg-white p-12 rounded-3xl border-2 border-dashed border-blue-100 text-center space-y-4">
-          <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto text-blue-500">
-            <Baby size={32} />
+        <div className="bg-white/50 backdrop-blur-sm p-12 rounded-[2rem] border-2 border-dashed border-outline-variant/20 text-center space-y-4">
+          <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto text-primary">
+            <Baby size={40} />
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-bold text-gray-900">No records yet for {childName || 'your child'}</h3>
-            <p className="text-gray-500">Start tracking growth and health vitals to see AI insights.</p>
+            <h3 className="text-2xl font-headline font-bold text-on-surface">No records for {childName || 'your child'}</h3>
+            <p className="text-on-surface-variant max-w-sm mx-auto">Start tracking growth and health vitals to see AI insights in your sanctuary.</p>
           </div>
         </div>
       )}
